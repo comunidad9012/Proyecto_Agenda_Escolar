@@ -1,0 +1,28 @@
+{% extends "base.html" %} {%block titulo%} Profesores {%endblock%} {%block body%}
+<form action="/profesores" method="get">
+    <input type="text" name="search" placeholder="Buscar profesores...">
+    <input type="submit" value="Buscar">
+</form>
+{% if tabla %}
+<table class="table table-bordered">
+    <tr>
+        {% for i in tabla[0].keys() %}
+        <th class="text-center">{{ i }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for i in tabla %}
+            <tr>
+                {% for valores in i.values() %}
+                <td class="text-center">{{ valores }}</td>
+                {% endfor %}
+                <td><a href="/editar_profesor?id_profesor={{ i.ID }}">Editar</a></td>
+            </tr>
+        {% endfor %}
+    </tr>    
+</table>
+{% else %}
+<p>No hay datos disponibles.</p>
+{% endif %}
+
+{%endblock%}
